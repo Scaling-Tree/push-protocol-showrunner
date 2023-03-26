@@ -17,7 +17,7 @@ export default class HelloWorldChannel extends EPNSChannel {
   }
   // Checks for profile Expiration and Sends notification to users
   // Whose Profile is about to be expired
-  async helloWorld(simulate) {
+  async helloWorld(simulate, message) {
     try {
       this.logInfo('Sending notification to evidence provider');
 
@@ -26,15 +26,15 @@ export default class HelloWorldChannel extends EPNSChannel {
       const notificationType = 1;
 
       //  Omit for broadcast, single address for targeted and channel address or array of addresses for subset
-      const recipients = this.channelAddress; 
+      const recipients = this.channelAddress;
 
       for (const e of mockMessages.messages) {
         await this.sendNotification({
           recipient: recipients,
-          title: e.title,
-          message: e.msg,
-          payloadTitle: e.title,
-          payloadMsg: e.msg,
+          title: '',
+          message: message,
+          payloadTitle: '',
+          payloadMsg: message,
           notificationType: notificationType,
           cta: e.cta,
           image: null,
